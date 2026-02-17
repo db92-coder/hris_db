@@ -150,7 +150,7 @@ Realistic employment timelines
 
 Valid department-manager relationships
 
-🚀 How To Run
+***🚀 How To Run***
 **1️⃣ Start PostgreSQL Container**
 docker compose up -d
 
@@ -168,7 +168,7 @@ docker exec -it hris_postgres psql -U postgres -d hris -f /sql/03_indexes.sql
 **5️⃣ Verify Data**
 SELECT COUNT(*) FROM employees;
 
-📸 Screenshots
+**📸 Screenshots**
 
 ## 📸 Database Tables Overview
 
