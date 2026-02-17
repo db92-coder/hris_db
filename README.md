@@ -7,7 +7,7 @@
 
 
 🏢 HRIS Database Engineering Project
-📌 Project Overview
+**📌 Project Overview**
 
 This project is a production-style Human Resources Information System (HRIS) built from scratch using modern database engineering principles.
 
@@ -29,7 +29,7 @@ Performance validation using EXPLAIN ANALYZE
 
 The goal of this project is to move beyond academic SQL usage and demonstrate real-world database engineering discipline.
 
-🧰 Technology Stack
+**🧰 Technology Stack**
 Component	Technology
 Database	PostgreSQL 16
 Containerisation	Docker
@@ -69,7 +69,7 @@ Leave Requests
 
 Performance Reviews
 
-🔗 Relationship Highlights
+**🔗 Relationship Highlights**
 
 Each Role belongs to a Department
 
@@ -83,8 +83,8 @@ Salary periods cannot overlap per employee
 
 Leave end dates must be ≥ start dates
 
-🔐 Data Integrity & Engineering Features
-✅ Referential Integrity
+**🔐 Data Integrity & Engineering Features**
+**✅ Referential Integrity**
 
 Foreign key constraints prevent orphan records
 
@@ -170,24 +170,33 @@ SELECT COUNT(*) FROM employees;
 
 📸 Screenshots
 
-(Create an /images folder and add screenshots)
+## 📸 Database Tables Overview
 
-Example markdown references:
+The HRIS schema includes 8 fully normalised relational tables with enforced foreign keys and constraints.
 
 ![Tables Overview](images/tables_overview.png)
-![Salary Exclusion Constraint](images/salary_constraint.png)
-![EXPLAIN ANALYZE Output](images/explain_output.png)
 
 
-Recommended screenshots:
+## 🔐 Salary Overlap Protection
 
-\dt table list
+The system prevents overlapping salary periods per employee using a PostgreSQL exclusion constraint.
 
-Salary exclusion constraint applied
+![Salary Overlap Error](images/salary_overlap_error.png)
 
-Manager validation query
 
-EXPLAIN ANALYZE output
+## ⚡ Indexed Salary Lookup Performance
+
+Performance validated using `EXPLAIN ANALYZE`.
+
+![Salary Explain Analyze](images/salary_explain.png)
+
+
+## 🧠 Department Manager Integrity Validation
+
+Managers must belong to the department they manage.
+
+![Manager Validation](images/manager_validation.png)
+
 
 **🧠 Engineering Concepts Demonstrated**
 
@@ -329,3 +338,9 @@ erDiagram
     DEPARTMENTS ||--o{ SALARY_HISTORY : paid_in
 
     EMPLOYEES }o--|| DEPARTMENTS : manages
+    
+
+
+
+
+
