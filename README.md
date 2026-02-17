@@ -230,3 +230,102 @@ to
 “I can design, enforce, and maintain a production-grade relational database system.”
 
 It reflects real-world database engineering practices used in enterprise HR systems.
+
+
+
+## 🧩 Entity Relationship Diagram (ERD)
+
+```mermaid
+erDiagram
+    DEPARTMENTS {
+        bigint department_id PK
+        text name
+        bigint manager_employee_id FK
+        timestamptz created_at
+    }
+
+    ROLES {
+        bigint role_id PK
+        bigint department_id FK
+        text title
+        boolean is_active
+        timestamptz created_at
+    }
+
+    EMPLOYEES {
+        bigint employee_id PK
+        text full_name
+        date date_of_birth
+        text address_line1
+        text address_suburb
+        text address_state
+        text address_postcode
+        text tfn_last4
+        text tfn_hash
+        boolean is_active
+        timestamptz created_at
+    }
+
+    EMPLOYEE_ROLES {
+        bigint employee_id FK
+        bigint role_id FK
+        boolean is_primary
+        date start_date
+        date end_date
+    }
+
+    EMPLOYMENT_CONTRACTS {
+        bigint contract_id PK
+        bigint employee_id FK
+        date start_date
+        date end_date
+        text employment_type
+        numeric hours_per_week
+        timestamptz created_at
+    }
+
+    LEAVE_REQUESTS {
+        bigint leave_request_id PK
+        bigint employee_id FK
+        date start_date
+        date end_date
+        text leave_type
+        text status
+        timestamptz created_at
+    }
+
+    PERFORMANCE_REVIEWS {
+        bigint review_id PK
+        bigint employee_id FK
+        date review_date
+        numeric score
+        text comments
+        bigint reviewing_department_id FK
+        bigint employee_department_id FK
+        timestamptz created_at
+    }
+
+    SALARY_HISTORY {
+        bigint salary_history_id PK
+        bigint employee_id FK
+        bigint department_id FK
+        numeric salary_amount
+        date effective_from
+        date effective_to
+        timestamptz created_at
+    }
+
+    %% Relationships
+    DEPARTMENTS ||--o{ ROLES : contains
+    ROLES ||--o{ EMPLOYEE_ROLES : assigned_to
+    EMPLOYEES ||--o{ EMPLOYEE_ROLES : has
+    EMPLOYEES ||--o{ EMPLOYMENT_CONTRACTS : has
+    EMPLOYEES ||--o{ LEAVE_REQUESTS : requests
+    EMPLOYEES ||--o{ PERFORMANCE_REVIEWS : receives
+    EMPLOYEES ||--o{ SALARY_HISTORY : has
+
+    DEPARTMENTS ||--o{ PERFORMANCE_REVIEWS : reviewing_dept
+    DEPARTMENTS ||--o{ PERFORMANCE_REVIEWS : employee_dept
+    DEPARTMENTS ||--o{ SALARY_HISTORY : paid_in
+
+    EMPLOYEES }o--|| DEPARTMENTS : manages
